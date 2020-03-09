@@ -9,11 +9,12 @@ source:
     - 0001-Allow-TARGET_POSTFIX-to-be-specified-and-empty.patch
 
 build:
-  number: 3
+  number: 4
 
 requirements:
   build:
     - {{ compiler('c') }}
+    - {{ cdt('alsa-lib-devel') }}  # [linux64]
     - cmake  # [win]
 
 about:
