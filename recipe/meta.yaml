@@ -15,6 +15,7 @@ requirements:
   build:
     - {{ compiler('c') }}
     - {{ cdt('alsa-lib-devel') }}  # [linux64]
+    - make   # [unix]
     - cmake  # [win]
 
 about:
