@@ -17,7 +17,9 @@ requirements:
     - {{ cdt('alsa-lib-devel') }}  # [linux64]
     - make   # [unix]
     - cmake  # [win]
-
+    - patch       # [not win]
+    - m2-patch    # [win]
+ 
 about:
   home: http://www.portaudio.com/
   license: MIT
