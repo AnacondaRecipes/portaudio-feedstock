@@ -9,17 +9,18 @@ source:
     - 0001-Allow-TARGET_POSTFIX-to-be-specified-and-empty.patch
 
 build:
-  number: 4
+  number: 6
 
 requirements:
   build:
     - {{ compiler('c') }}
-    - {{ cdt('alsa-lib-devel') }}  # [linux64]
-    - make   # [unix]
+    # TODO: map CDT alsa-lib-devel to new X11 package
+    # - { cdt('alsa-lib-devel') }
+    - make  # [unix]
     - cmake  # [win]
-    - patch       # [not win]
-    - m2-patch    # [win]
- 
+    - patch  # [not win]
+    - m2-patch  # [win]
+
 about:
   home: http://www.portaudio.com/
   license: MIT
