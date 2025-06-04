@@ -7,14 +7,10 @@ cmake %CMAKE_ARGS% -DCMAKE_INSTALL_PREFIX=%LIBRARY_PREFIX% ^
       .
 if errorlevel 1 exit 1
 
-cmake --build . --config Release
+cmake --build . --target ALL_BUILD --config Release
 if errorlevel 1 exit 1
 
-echo "Starting installation step..."
-cmake --build . --config Release --target install
-if errorlevel 1 (
-  echo "cmake --build install failed, trying cmake --install..."
-  cmake --install . --config Release
-  if errorlevel 1 exit 1
-)
+copy /y Release\*.dll %LIBRARY_BIN%
+copy /y Release\*.lib %LIBRARY_LIB%
+copy /y include\*.h %LIBRARY_INC%
 
