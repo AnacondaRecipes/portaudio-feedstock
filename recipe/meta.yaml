@@ -13,6 +13,7 @@ build:
   ignore_run_exports:
     - libstdcxx-ng     # [linux]
     - libcxx           # [osx]
+    - vs2015_runtime   # [win]
 
 requirements:
   build:
