@@ -9,21 +9,32 @@ source:
     - 0001-Allow-TARGET_POSTFIX-to-be-specified-and-empty.patch
 
 build:
-  number: 6
+  number: 5
 
 requirements:
   build:
     - {{ compiler('c') }}
-    # TODO: map CDT alsa-lib-devel to new X11 package
-    # - { cdt('alsa-lib-devel') }
-    - make  # [unix]
-    - cmake  # [win]
-    - patch  # [not win]
+    - make      # [unix]
+    - cmake     # [win]
+    - patch     # [not win]
     - m2-patch  # [win]
+  host:
+    - alsa-lib {{ alsa_lib }}  # [linux]
+  run:
+    - alsa-lib  # [linux]
+
+test:
+  commands:
+    - test -f $PREFIX/lib/libportaudio$SHLIB_EXT                   # [not win]
+    - test -f $PREFIX/include/portaudio.h                          # [not win]
+    - if not exist %PREFIX%\\Library\\include\\portaudio.h exit 1  # [win]
+    - if not exist %PREFIX%\\Library\\lib\\portaudio.lib exit 1    # [win]
+    - if not exist %PREFIX%\\Library\\bin\\portaudio.dll exit 1    # [win]
 
 about:
-  home: http://www.portaudio.com/
+  home: http://www.portaudio.com
   license: MIT
+  license_family: MIT
   license_file: LICENSE.txt
   summary: A cross platform, open-source, audio I/O library
   description: |
