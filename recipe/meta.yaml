@@ -10,6 +10,9 @@ source:
 
 build:
   number: 5
+  ignore_run_exports:
+    - libstdcxx-ng     # [linux]
+    - libcxx           # [osx]
 
 requirements:
   build:
