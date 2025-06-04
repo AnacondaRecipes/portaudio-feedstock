@@ -10,6 +10,11 @@ if errorlevel 1 exit 1
 cmake --build . --config Release
 if errorlevel 1 exit 1
 
-cmake --install . --config Release
-if errorlevel 1 exit 1
+echo "Starting installation step..."
+cmake --build . --config Release --target install
+if errorlevel 1 (
+  echo "cmake --build install failed, trying cmake --install..."
+  cmake --install . --config Release
+  if errorlevel 1 exit 1
+)
 
