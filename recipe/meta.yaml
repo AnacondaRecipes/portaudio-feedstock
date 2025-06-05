@@ -3,31 +3,48 @@ package:
   version: 19.6.0
 
 source:
-  url: http://www.portaudio.com/archives/pa_stable_v190600_20161030.tgz
+  url: https://www.portaudio.com/archives/pa_stable_v190600_20161030.tgz
   sha256: f5a21d7dcd6ee84397446fa1fa1a0675bb2e8a4a6dceb4305a8404698d8d1513
   patches:
     - 0001-Allow-TARGET_POSTFIX-to-be-specified-and-empty.patch
 
 build:
-  number: 4
+  number: 5
+  ignore_run_exports:
+    - libstdcxx-ng     # [linux]
+    - libcxx           # [osx]
+    - vs2015_runtime   # [win]
 
 requirements:
   build:
     - {{ compiler('c') }}
-    - {{ cdt('alsa-lib-devel') }}  # [linux64]
-    - make   # [unix]
-    - cmake  # [win]
-    - patch       # [not win]
-    - m2-patch    # [win]
- 
+    - {{ compiler('cxx') }}
+    - cmake
+    - make      # [unix]
+    - patch     # [not win]
+    - m2-patch  # [win]
+  host:
+    - alsa-lib {{ alsa_lib }}  # [linux]
+  run:
+    - alsa-lib                 # [linux]
+
+test:
+  commands:
+    - test -f $PREFIX/lib/libportaudio$SHLIB_EXT                   # [not win]
+    - test -f $PREFIX/include/portaudio.h                          # [not win]
+    - if not exist %PREFIX%\\Library\\include\\portaudio.h exit 1  # [win]
+    - if not exist %PREFIX%\\Library\\lib\\portaudio.lib exit 1    # [win]
+    - if not exist %PREFIX%\\Library\\bin\\portaudio.dll exit 1    # [win]
+
 about:
-  home: http://www.portaudio.com/
+  home: https://www.portaudio.com
   license: MIT
+  license_family: MIT
   license_file: LICENSE.txt
   summary: A cross platform, open-source, audio I/O library
   description: |
     PortAudio is a free, cross-platform, open-source, audio I/O library. It
     lets you write simple audio programs in 'C' or C++ that will compile and run on many platforms including Windows, Macintosh OS X, and Unix
     (OSS/ALSA).
-  doc_url: http://www.portaudio.com/docs.html
+  doc_url: https://www.portaudio.com/docs.html
   dev_url: https://github.com/EddieRingle/portaudio
