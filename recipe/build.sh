@@ -1,5 +1,7 @@
 #!/bin/sh
 
+export CMAKE_POLICY_VERSION_MINIMUM=3.5
+
 mkdir buildcmake && cd buildcmake
 
 cmake ${CMAKE_ARGS} -DCMAKE_INSTALL_PREFIX=$PREFIX \
