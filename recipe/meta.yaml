@@ -17,11 +17,11 @@ build:
 
 requirements:
   build:
+    - {{ stdlib('c') }}
     - {{ compiler('c') }}
     - {{ compiler('cxx') }}
     - cmake
     - make      # [unix]
-    - patch     # [not win]
   host:
     - alsa-lib {{ alsa_lib }}  # [linux]
   run:
