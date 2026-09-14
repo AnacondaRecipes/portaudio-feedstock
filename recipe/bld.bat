@@ -6,6 +6,7 @@ cmake -G"%CMAKE_GENERATOR%" ^
       -DCMAKE_INSTALL_LIBDIR=lib ^
       -DBUILD_SHARED_LIBS=ON ^
       -DPA_LIBNAME_ADD_SUFFIX:BOOL=OFF ^
+      -DCMAKE_POLICY_VERSION_MINIMUM=3.5 ^
       -DPA_BUILD_STATIC:BOOL=OFF ^
       .
 if errorlevel 1 exit 1

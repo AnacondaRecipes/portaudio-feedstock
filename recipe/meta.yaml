@@ -9,7 +9,7 @@ source:
     - 0001-Allow-TARGET_POSTFIX-to-be-specified-and-empty.patch
 
 build:
-  number: 5
+  number: 6
   ignore_run_exports:
     - libstdcxx-ng     # [linux]
     - libcxx           # [osx]
@@ -17,12 +17,11 @@ build:
 
 requirements:
   build:
+    - {{ stdlib('c') }}
     - {{ compiler('c') }}
     - {{ compiler('cxx') }}
     - cmake
     - make      # [unix]
-    - patch     # [not win]
-    - m2-patch  # [win]
   host:
     - alsa-lib {{ alsa_lib }}  # [linux]
   run:
